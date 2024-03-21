@@ -43,9 +43,9 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     lib.addConfigHeader(config_h);
-    lib.root_module.link_libc = true;
+    lib.linkLibC();
     lib.addCSourceFiles(.{
-        .dependency = libmnl_dep,
+        .root = libmnl_dep.path("."),
         .files = &mnl_src,
         .flags = &.{},
     });
